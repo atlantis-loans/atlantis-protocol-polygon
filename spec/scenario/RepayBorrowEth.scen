@@ -1,0 +1,206 @@
+-- Tests for repaying borrows
+
+Macro SetupBorrow borrowRate
+    NewComptroller price:1.0 -- TODO: This should really be a price for a specific asset
+    ListedAToken ZRX aZRX borrowRate
+    ListedEtherToken aMATIC borrowRate 0.005e9
+    SetCollateralFactor aZRX collateralFactor:0.5
+    SetCollateralFactor aMATIC collateralFactor:0.5
+    Donate aMATIC 0.003e18
+    Prep Geoff Some ZRX aZRX
+    Mint Geoff 100e18 aZRX
+    EnterMarkets Geoff aZRX aMATIC
+
+Macro NewBorrowEth borrowAmount borrowRate
+    SetupBorrow borrowRate
+    Borrow Geoff borrowAmount aMATIC
+
+Test "Borrow, hold a few blocks, and repay part"
+    NewBorrowEth borrowAmount:0.001e18 borrowRate:0.000005
+    Assert Equal (AToken aMATIC BorrowBalance Geoff) 0.001e18
+    Assert Equal (AToken aMATIC TotalBorrowsCurrent) 0.001e18
+    -- Now let's add some blocks and see what happs
+    FastForward 300000 Blocks -- 0.001e18 * (1 + 300000 * 0.000005)
+    Assert Equal (AToken aMATIC BorrowBalance Geoff) 0.0025e18
+    -- Now let's repay one full token
+    Expect Changes (EtherBalance Geoff) -0.001e18
+    Expect Changes (EtherBalance aMATIC) +0.001e18
+    RepayBorrowEth Geoff 0.001e18 aMATIC
+    ---- Let's check the overall numbers
+    Assert Equal (AToken aMATIC BorrowBalance Geoff) 0.0015e18
+    Assert Equal (AToken aMATIC TotalBorrowsCurrent) 0.0015e18
+    FastForward 200000 Blocks -- 0.0015e18 * (1 + 2000 * 0.000005)
+    Assert Equal (AToken aMATIC BorrowBalance Geoff) 0.003e18
+    Assert Equal (AToken aMATIC TotalBorrowsCurrent) 0.003e18
+
+Test "Borrow, hold a few blocks, and repay part via maximillion"
+    NewBorrowEth borrowAmount:0.001e18 borrowRate:0.000005
+    Maximillion Deploy aMATIC
+    Assert Equal (AToken aMATIC BorrowBalance Geoff) 0.001e18
+    Assert Equal (AToken aMATIC TotalBorrowsCurrent) 0.001e18
+    -- Now let's add some blocks and see what happs
+    FastForward 300000 Blocks -- 0.001e18 * (1 + 300000 * 0.000005)
+    Assert Equal (AToken aMATIC BorrowBalance Geoff) 0.0025e18
+    -- Now let's repay one full token
+    Expect Changes (EtherBalance Geoff) -0.001e18
+    Expect Changes (EtherBalance aMATIC) +0.001e18
+    RepayBorrowEthMax Geoff 0.001e18 aMATIC
+    ---- Let's check the overall numbers
+    Assert Equal (AToken aMATIC BorrowBalance Geoff) 0.0015e18
+    Assert Equal (AToken aMATIC TotalBorrowsCurrent) 0.0015e18
+    FastForward 200000 Blocks -- 0.0015e18 * (1 + 200000 * 0.000005)
+    Assert Equal (AToken aMATIC BorrowBalance Geoff) 0.003e18
+    Assert Equal (AToken aMATIC TotalBorrowsCurrent) 0.003e18
+
+Test "Don't borrow and then do repay"
+    SetupBorrow borrowRate:0.000005
+    Assert Equal (AToken aMATIC BorrowBalance Geoff) Zero
+    Assert Equal (AToken aMATIC TotalBorrowsCurrent) Zero
+    -- Now let's add some blocks and see what happs
+    FastForward 300000 Blocks -- 0 * (1 + 300000 * 0.000005)
+    Assert Equal (AToken aMATIC BorrowBalance Geoff) Zero
+    -- Now let's repay one full token
+    Expect Changes (EtherBalance Geoff) Zero
+    Expect Changes (EtherBalance aMATIC) Zero
+    RepayBorrowEth Geoff 0 aMATIC
+    ---- Let's check the overall numbers
+    Assert Equal (AToken aMATIC BorrowBalance Geoff) Zero
+    Assert Equal (AToken aMATIC TotalBorrowsCurrent) Zero
+
+Test "Don't borrow and repay part via maximillion"
+    SetupBorrow borrowRate:0.000005
+    Maximillion Deploy aMATIC
+    Assert Equal (AToken aMATIC BorrowBalance Geoff) Zero
+    Assert Equal (AToken aMATIC TotalBorrowsCurrent) Zero
+    -- Now let's add some blocks and see what happs
+    FastForward 300000 Blocks -- 0 * (1 + 300000 * 0.000005)
+    Assert Equal (AToken aMATIC BorrowBalance Geoff) Zero
+    -- Now let's repay one full token
+    Expect Changes (EtherBalance Geoff) Zero
+    Expect Changes (EtherBalance aMATIC) Zero
+    RepayBorrowEthMax Geoff 0.001e18 aMATIC
+    ---- Let's check the overall numbers
+    Assert Equal (AToken aMATIC BorrowBalance Geoff) Zero
+    Assert Equal (AToken aMATIC TotalBorrowsCurrent) Zero
+
+Test "Borrow, hold a few blocks, and repay full"
+    NewBorrowEth borrowAmount:0.001e18 borrowRate:0.000005
+    Assert Equal (AToken aMATIC BorrowBalance Geoff) 0.001e18
+    Assert Equal (AToken aMATIC TotalBorrowsCurrent) 0.001e18
+    -- Now let's add some blocks and see what happs
+    FastForward 300000 Blocks -- 0.001e18 * (1 + 300000 * 0.000005)
+    Assert Equal (AToken aMATIC BorrowBalance Geoff) 0.0025e18
+    -- Now let's repay fully
+    Expect Changes (EtherBalance Geoff) -0.0025e18
+    Expect Changes (EtherBalance aMATIC) +0.0025e18
+    RepayBorrowEth Geoff 0.0025e18 aMATIC
+    -- Let's check the overall numbers
+    Assert Equal (AToken aMATIC BorrowBalance Geoff) Zero
+    Assert Equal (AToken aMATIC TotalBorrowsCurrent) Zero
+    FastForward 200000 Blocks -- 0e18 * (1 + 200000 * 0.000005)
+    Assert Equal (AToken aMATIC BorrowBalance Geoff) Zero
+    Assert Equal (AToken aMATIC TotalBorrowsCurrent) Zero
+
+Test "Borrow, hold a few blocks, and repay full via maximillion"
+    NewBorrowEth borrowAmount:0.001e18 borrowRate:0.000005
+    Maximillion Deploy aMATIC
+    Assert Equal (AToken aMATIC BorrowBalance Geoff) 0.001e18
+    Assert Equal (AToken aMATIC TotalBorrowsCurrent) 0.001e18
+    -- Now let's add some blocks and see what happs
+    FastForward 300000 Blocks -- 0.001e18 * (1 + 300000 * 0.000005)
+    Assert Equal (AToken aMATIC BorrowBalance Geoff) 0.0025e18
+    -- Now let's repay fully
+    Expect Changes (EtherBalance Geoff) -0.0025e18
+    Expect Changes (EtherBalance aMATIC) +0.0025e18
+    RepayBorrowEthMax Geoff 0.0025e18 aMATIC
+    -- Let's check the overall numbers
+    Assert Equal (AToken aMATIC BorrowBalance Geoff) Zero
+    Assert Equal (AToken aMATIC TotalBorrowsCurrent) Zero
+    FastForward 200000 Blocks -- 0e18 * (1 + 200000 * 0.000005)
+    Assert Equal (AToken aMATIC BorrowBalance Geoff) Zero
+    Assert Equal (AToken aMATIC TotalBorrowsCurrent) Zero
+
+Test "Borrow, hold a few blocks, and repay too much"
+    NewBorrowEth borrowAmount:0.001e18 borrowRate:0.000005
+    Assert Equal (AToken aMATIC BorrowBalance Geoff) 0.001e18
+    Assert Equal (AToken aMATIC TotalBorrowsCurrent) 0.001e18
+    -- Now let's add some blocks and see what happs
+    FastForward 300000 Blocks -- 0.001e18 * (1 + 300000 * 0.000005)
+    Assert Equal (AToken aMATIC BorrowBalance Geoff) 0.0025e18
+    -- Now let's repay fully
+    Expect Changes (EtherBalance Geoff) Zero
+    Expect Changes (EtherBalance aMATIC) Zero
+    -- TODO: This currently drains the sent-eth
+    AllowFailures
+    RepayBorrowEth Geoff 1.0e18 aMATIC
+    Assert Revert "revert REPAY_BORROW_NEW_ACCOUNT_BORROW_BALANCE_CALCULATION_FAILED"
+    -- Let's check the overall numbers
+    Assert Equal (AToken aMATIC BorrowBalance Geoff) 0.0025e18
+    Assert Equal (AToken aMATIC TotalBorrowsCurrent) 0.0025e18
+
+Test "Borrow, hold a few blocks, and repay too much via maximillion"
+    NewBorrowEth borrowAmount:0.001e18 borrowRate:0.000005
+    Maximillion Deploy aMATIC
+    Assert Equal (AToken aMATIC BorrowBalance Geoff) 0.001e18
+    Assert Equal (AToken aMATIC TotalBorrowsCurrent) 0.001e18
+    -- Now let's add some blocks and see what happs
+    FastForward 300000 Blocks -- 0.001e18 * (1 + 300000 * 0.000005)
+    Assert Equal (AToken aMATIC BorrowBalance Geoff) 0.0025e18
+    -- Now let's repay fully
+    Expect Changes (EtherBalance Geoff) -0.0025e18
+    Expect Changes (EtherBalance aMATIC) +0.0025e18
+    RepayBorrowEthMax Geoff 1.0e18 aMATIC
+    -- Let's check the overall numbers
+    Assert Equal (AToken aMATIC BorrowBalance Geoff) Zero
+    Assert Equal (AToken aMATIC TotalBorrowsCurrent) Zero
+    FastForward 200000 Blocks -- 0e18 * (1 + 200000 * 0.000005)
+    Assert Equal (AToken aMATIC BorrowBalance Geoff) Zero
+    Assert Equal (AToken aMATIC TotalBorrowsCurrent) Zero
+
+Test "Borrow, and get a negative total cash situation"
+    NewBorrowEth borrowAmount:0.001e18 borrowRate:0.000005
+    Assert Equal (AToken aMATIC BorrowBalance Geoff) 0.001e18
+    Assert Equal (AToken aMATIC TotalBorrowsCurrent) 0.001e18
+    -- Let's zoom way forward into the future
+    FastForward 9800000 Blocks -- 0.001e18 * (1 + 9800000 * 0.000005)
+    Assert Equal (AToken aMATIC BorrowBalance Geoff) 0.05e18
+    Assert Equal (AToken aMATIC TotalBorrowsCurrent) 0.05e18
+    -- Now let's repay one bit
+    RepayBorrowEth Geoff 0.001e18 aMATIC
+    Assert Equal (AToken aMATIC BorrowBalance Geoff) 0.049e18
+    Assert Equal (AToken aMATIC TotalBorrowsCurrent) 0.049e18
+
+Test "Borrow, hold a few blocks, and repay behalf part"
+    NewBorrowEth borrowAmount:0.001e18 borrowRate:0.000005
+    Assert Equal (AToken aMATIC BorrowBalance Geoff) 0.001e18
+    Assert Equal (AToken aMATIC TotalBorrowsCurrent) 0.001e18
+    -- Now let's add some blocks and see what happs
+    FastForward 300000 Blocks -- 0.001e18 * (1 + 300000 * 0.000005)
+    Assert Equal (AToken aMATIC BorrowBalance Geoff) 0.0025e18
+    -- Now let's repay one full token from another user
+    RepayBorrowEthBehalf Torrey Geoff 0.001e18 aMATIC
+    Assert Equal (AToken aMATIC BorrowBalance Torrey) Zero
+    Assert Equal (AToken aMATIC BorrowBalance Geoff) 0.0015e18
+    Assert Equal (AToken aMATIC TotalBorrowsCurrent) 0.0015e18
+    FastForward 200000 Blocks -- 0.0015e18 * (1 + 200000 * 0.000005)
+    Assert Equal (AToken aMATIC BorrowBalance Torrey) Zero
+    Assert Equal (AToken aMATIC BorrowBalance Geoff) 0.003e18
+    Assert Equal (AToken aMATIC TotalBorrowsCurrent) 0.003e18
+
+Test "Prohibit repay by comptroller hook"
+    NewBorrowEth borrowAmount:0.001e18 borrowRate:0.000005
+    Assert Equal (AToken aMATIC BorrowBalance Geoff) 0.001e18
+    Assert Equal (AToken aMATIC TotalBorrowsCurrent) 0.001e18
+    -- Now let's add some blocks and see what happs
+    FastForward 300000 Blocks -- 0.001e18 * (1 + 300000 * 0.000005)
+    Assert Equal (AToken aMATIC BorrowBalance Geoff) 0.0025e18
+    -- Now let's repay one full token
+    Expect Changes (EtherBalance Geoff) Zero
+    Expect Changes (EtherBalance aMATIC) Zero
+    Comptroller UnList aMATIC -- Mock unlist aMATIC
+    AllowFailures
+    RepayBorrowEth Geoff 0.001e18 aMATIC
+    Assert RevertFailure COMPTROLLER_REJECTION "revert repayBorrow failed"
+    ---- Let's check the overall numbers
+    Assert Equal (AToken aMATIC BorrowBalance Geoff) 0.0025e18
+    Assert Equal (AToken aMATIC TotalBorrowsCurrent) 0.0025e18
