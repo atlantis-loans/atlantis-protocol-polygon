@@ -1,0 +1,150 @@
+{
+    "Contracts": {
+        "AtlantisLens": "0x027C93eeB57E6aEe483a0D1b014b2C996F09c5B8",
+        "Unitroller": "0x8F85EE1c0a96734cb76870106DD9C016db6dE09A",
+        "Comptroller": "0xb3e91b3f1d2ba099a283c00d807177e942aaa759",
+        "LPVaultProxy": "0xD771bf2930628258Bfcc37707f4334b4B0c0F2dc",
+        "LP": "0x350cac55bE4dB9F043E5c20E8eF0E0dbD604fEA5",
+        "AtlantisVaultProxy": "0xfcfD3E0dDFcDd8595fa9362E394DC6bCa23Cbe4B",
+        "aMATIC": "0xA65722af4957CeF481Edb4cB255f804DD36E8aDc",
+        "aATLX": "0x13047b242dd799340FDC1FF8DF8038A06F5b2A38",
+        "ATLX": "0x0b68782eFF3177f1F9240B64A7e2F8E0497e2454",
+        "aUSDT": "0x02DED9052B696F9848FA909D8923E02c69625ae5",
+        "USDT": "0xc2132D05D31c914a87C6611C10748AEb04B58e8F",
+        "aUSDC": "0x8CfC23414d758F7A5eCB922947a19C7380eAc61b",
+        "USDC": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
+        "aWETH": "0x294C94559C7449B44015CE692E3D2fB75845abFc",
+        "WETH": "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619",
+        "aWBTC": "0xF59aa1208f398a699C31271b036dF30B0BD63149",
+        "WBTC": "0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6",
+        "aLINK": "0x0b68782eFF3177f1F9240B64A7e2F8E0497e2454",
+        "LINK": "0x53E0bca35eC356BD5ddDFebbD1Fc0fD03FaBad39",
+        "Timelock": "0x0E8C9FC7cd455fAF22D13fCafd5C6F4eecA02A23",
+        "GovernorAlpha": "0x4B10244a761e5894aAfd05E963D4Bde271b9c34d",
+        "AtlantisChainLinkOracle": "0xc33BC01C5CaaAb948C707AFa3B753b79a3615e63",
+        "Base0bps_Slope1200bps_Jump2800bps_Kink80": "0x032dd2cd4e64D8C30FED171D0D0B6cf4A7995c29"
+       
+    },
+    "AtlantisLens": {
+        "name": "AtlantisLens",
+        "contract": "AtlantisLens",
+        "address": "0x0E8C9FC7cd455fAF22D13fCafd5C6F4eecA02A23"
+    },
+    "Unitroller": {
+        "description": "Unitroller",
+        "address": "0xE7E304F136c054Ee71199Efa6E26E8b0DAe242F3"
+    },
+    "Comptroller": {
+        "Comptroller": {
+            "address": "0xE56C4d86c8178e752c4d55c88A74422979cCe22e",
+            "contract": "Comptroller",
+            "description": "Atlantis Comptroller Contract"
+        }
+    },
+    "Timelock": {
+        "Timelock": {
+            "address": "0x0E8C9FC7cd455fAF22D13fCafd5C6F4eecA02A23",
+            "contract": "Timelock",
+            "description": "Timelock"
+        }
+    },
+    "GovernorAlpha": {
+        "GovernorAlpha": {
+            "address": "0x4B10244a761e5894aAfd05E963D4Bde271b9c34d",
+            "contract": "GovernorAlpha",
+            "description": "GovernorAlpha",
+            "guardian": "0xD6929989D9038fA5BD5c3D26F5e7bbEc0532F38b"
+        }
+    },
+    "ATokenDelegate": {
+        "ATokenDelegate": {
+            "address": "0xc9E38dd097d00137846630b8e387B06C5a992C54",
+            "contract": "ABep20Delegate",
+            "description": "Delegate ABep20Delegate"
+        }
+    },
+    "aTokens": {
+        "aUSDT": {
+            "name": "Atlantis USDT",
+            "symbol": "aUSDT",
+            "decimals": 8,
+            "address": "0x5A31D65e89292865b09ad3Bb10bf38E19b1074ff",
+            "initial_exchange_rate_mantissa": "20000000000000000",
+            "admin": "0x",
+            "underlying": "0xc2132D05D31c914a87C6611C10748AEb04B58e8F",
+            "contract": "ABep20Delegate"
+        },
+        "aUSDC": {
+            "name": "Atlantis USDC",
+            "symbol": "aUSDC",
+            "decimals": 8,
+            "address": "0x8CfC23414d758F7A5eCB922947a19C7380eAc61b",
+            "initial_exchange_rate_mantissa": "20000000000000000",
+            "admin": "0x",
+            "underlying": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
+            "contract": "ABep20Delegate"
+        },
+        "aATLX": {
+            "name": "Atlantis ATL",
+            "symbol": "aATLX",
+            "decimals": 8,
+            "address": "0x13047b242dd799340FDC1FF8DF8038A06F5b2A38",
+            "initial_exchange_rate_mantissa": "20000000000000000",
+            "admin": "0x",
+            "underlying": "0x0b68782eFF3177f1F9240B64A7e2F8E0497e2454",
+            "contract": "ABep20Delegate"
+        },
+        "aMATIC": {
+            "name": "Atlantis MATIC",
+            "symbol": "aMATIC",
+            "decimals": 8,
+            "address": "0xA65722af4957CeF481Edb4cB255f804DD36E8aDc",
+            "initial_exchange_rate_mantissa": "20000000000000000",
+            "admin": "0x",
+            "underlying": "",
+            "contract": "aMATIC"
+        },
+        "aWETH": {
+            "name": "Atlantis Polygon WETH",
+            "symbol": "aWETH",
+            "decimals": 8,
+            "address": "0x294C94559C7449B44015CE692E3D2fB75845abFc",
+            "initial_exchange_rate_mantissa": "20000000000000000",
+            "admin": "0x",
+            "underlying": "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619",
+            "contract": "aETH"
+        },
+        "aWBTC": {
+            "name": "Atlantis Polygon WBTC",
+            "symbol": "aWBTC",
+            "decimals": 8,
+            "address": "0xF59aa1208f398a699C31271b036dF30B0BD63149",
+            "initial_exchange_rate_mantissa": "20000000000000000",
+            "admin": "0x",
+            "underlying": "0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6",
+            "contract": "aBTC"
+        },
+        "aLINK": {
+            "name": "Atlantis LINK",
+            "symbol": "aLINK",
+            "decimals": 8,
+            "address": "0x0b68782eFF3177f1F9240B64A7e2F8E0497e2454",
+            "initial_exchange_rate_mantissa": "20000000000000000",
+            "admin": "0x",
+            "underlying": "0x53E0bca35eC356BD5ddDFebbD1Fc0fD03FaBad39",
+            "contract": "ABep20Delegate"
+        }
+    },
+    "InterestRateModel": {
+        "Base0bps_Slope1200bps_Jump2800bps_Kink80": {
+            "name": "Base0bps_Slope1200bps_Jump2800bps_Kink80",
+            "contract": "JumpRateModelV2",
+            "description": "JumpRateModelV2 baseRate=0 multiplier=120000000000000000 jump=2800000000000000000 kink=800000000000000000",
+            "address": "0x032dd2cd4e64D8C30FED171D0D0B6cf4A7995c29",
+            "base": "0",
+            "slope": "120000000000000000",
+            "jump": "2800000000000000000",
+            "kink": "800000000000000000"
+        }
+    }
+}

@@ -8,7 +8,7 @@
         "AtlantisVaultProxy": "0x",
         "aMATIC": "0x5A9A90983A369b6bB8F062f0AFe6219Ac01caF63",
         "aATLXX": "0x7c0697155617b7A797CB7517d483DbBdB17089CF",
-        "ATLX": "0x1fD991fb6c3102873ba68a4e6e6a87B3a5c10271",
+        "ATLX": "0x0b68782eFF3177f1F9240B64A7e2F8E0497e2454",
         "aBUSD": "0x0503FEaa5854E55E5607e40371e2a1b0d1B9df7F",
         "BUSD": "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
         "aUSDT": "0xfEAd9619e88464e5aD1Ea9Df458dcc147F03ea0C",
@@ -136,7 +136,7 @@
             "address": "0x7c0697155617b7A797CB7517d483DbBdB17089CF",
             "initial_exchange_rate_mantissa": "20000000000000000",
             "admin": "0x",
-            "underlying": "0x1fD991fb6c3102873ba68a4e6e6a87B3a5c10271",
+            "underlying": "0x0b68782eFF3177f1F9240B64A7e2F8E0497e2454",
             "contract": "ABep20Delegate"
         },
         "aMATIC": {

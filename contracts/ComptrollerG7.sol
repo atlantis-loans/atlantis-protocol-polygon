@@ -1328,6 +1328,6 @@ contract ComptrollerG7 is ComptrollerV5Storage, ComptrollerInterface, Comptrolle
      * @return The address of Atlantis
      */
     function getAtlantisAddress() public view returns (address) {
-        return 0x1fD991fb6c3102873ba68a4e6e6a87B3a5c10271;
+        return 0x0b68782eFF3177f1F9240B64A7e2F8E0497e2454;
     }
 }
