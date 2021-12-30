@@ -700,6 +700,18 @@ contract CommunityVault is CommunityVaultStorage, ECDSA {
         admin = address(0);
     }
 
+    /**
+     * @dev Returns the address of the community store
+     */
+    function getAtlantisStore() public view returns (address) {
+        return address(communityStore);
+    }
+
+    /**
+     * @notice Function that updates pending rewards (This function is deprecated)
+     */
+    function updatePendingRewards() public { }
+
     /*** Admin Functions ***/
 
     function _become(CommunityVaultProxy communityVaultProxy) external {
