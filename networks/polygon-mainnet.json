@@ -19,16 +19,21 @@
         "WBTC": "0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6",
         "aLINK": "0x0b68782eFF3177f1F9240B64A7e2F8E0497e2454",
         "LINK": "0x53E0bca35eC356BD5ddDFebbD1Fc0fD03FaBad39",
-        "Timelock": "0x0E8C9FC7cd455fAF22D13fCafd5C6F4eecA02A23",
-        "GovernorAlpha": "0x4B10244a761e5894aAfd05E963D4Bde271b9c34d",
+        "aQUICK": "0x4F9D3EeB422f48Aa71dC553b7f26948f31C8c503",
+        "QUICK": "0x831753DD7087CaC61aB5644b308642cc1c33Dc13",
+        "aSAND": "0x9f019142f8Fd51f97c8Da95D4f84551860f63117",
+        "SAND": "0xBbba073C31bF03b8ACf7c28EF0738DeCF3695683",
+        "Timelock": "0x6d55091B3E8bA859284F3B68e7bA7B6E55f16e15",
+        "GovernorAlpha": "0x38AC3742eb9bcc2967e49A61192a2ba122DBd1b3",
         "AtlantisChainLinkOracle": "0xc33BC01C5CaaAb948C707AFa3B753b79a3615e63",
-        "Base0bps_Slope1200bps_Jump2800bps_Kink80": "0x032dd2cd4e64D8C30FED171D0D0B6cf4A7995c29"
+        "Base0bps_Slope1200bps_Jump2800bps_Kink80": "0x032dd2cd4e64D8C30FED171D0D0B6cf4A7995c29",
+        "Base260bps_Slope1200bps_Jump3000bps_Kink80": "0x686c87b31799028A890cd4C35Cfe1d8C5Fad9B4F"
        
     },
     "AtlantisLens": {
         "name": "AtlantisLens",
         "contract": "AtlantisLens",
-        "address": "0x0E8C9FC7cd455fAF22D13fCafd5C6F4eecA02A23"
+        "address": "0x027C93eeB57E6aEe483a0D1b014b2C996F09c5B8"
     },
     "Unitroller": {
         "description": "Unitroller",
@@ -43,14 +48,14 @@
     },
     "Timelock": {
         "Timelock": {
-            "address": "0x0E8C9FC7cd455fAF22D13fCafd5C6F4eecA02A23",
+            "address": "0x6d55091B3E8bA859284F3B68e7bA7B6E55f16e15",
             "contract": "Timelock",
             "description": "Timelock"
         }
     },
     "GovernorAlpha": {
         "GovernorAlpha": {
-            "address": "0x4B10244a761e5894aAfd05E963D4Bde271b9c34d",
+            "address": "0x38AC3742eb9bcc2967e49A61192a2ba122DBd1b3",
             "contract": "GovernorAlpha",
             "description": "GovernorAlpha",
             "guardian": "0xD6929989D9038fA5BD5c3D26F5e7bbEc0532F38b"
@@ -63,78 +68,6 @@
             "description": "Delegate ABep20Delegate"
         }
     },
-    "aTokens": {
-        "aUSDT": {
-            "name": "Atlantis USDT",
-            "symbol": "aUSDT",
-            "decimals": 8,
-            "address": "0x5A31D65e89292865b09ad3Bb10bf38E19b1074ff",
-            "initial_exchange_rate_mantissa": "20000000000000000",
-            "admin": "0x",
-            "underlying": "0xc2132D05D31c914a87C6611C10748AEb04B58e8F",
-            "contract": "ABep20Delegate"
-        },
-        "aUSDC": {
-            "name": "Atlantis USDC",
-            "symbol": "aUSDC",
-            "decimals": 8,
-            "address": "0x8CfC23414d758F7A5eCB922947a19C7380eAc61b",
-            "initial_exchange_rate_mantissa": "20000000000000000",
-            "admin": "0x",
-            "underlying": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
-            "contract": "ABep20Delegate"
-        },
-        "aATLX": {
-            "name": "Atlantis ATL",
-            "symbol": "aATLX",
-            "decimals": 8,
-            "address": "0x13047b242dd799340FDC1FF8DF8038A06F5b2A38",
-            "initial_exchange_rate_mantissa": "20000000000000000",
-            "admin": "0x",
-            "underlying": "0x0b68782eFF3177f1F9240B64A7e2F8E0497e2454",
-            "contract": "ABep20Delegate"
-        },
-        "aMATIC": {
-            "name": "Atlantis MATIC",
-            "symbol": "aMATIC",
-            "decimals": 8,
-            "address": "0xA65722af4957CeF481Edb4cB255f804DD36E8aDc",
-            "initial_exchange_rate_mantissa": "20000000000000000",
-            "admin": "0x",
-            "underlying": "",
-            "contract": "aMATIC"
-        },
-        "aWETH": {
-            "name": "Atlantis Polygon WETH",
-            "symbol": "aWETH",
-            "decimals": 8,
-            "address": "0x294C94559C7449B44015CE692E3D2fB75845abFc",
-            "initial_exchange_rate_mantissa": "20000000000000000",
-            "admin": "0x",
-            "underlying": "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619",
-            "contract": "aETH"
-        },
-        "aWBTC": {
-            "name": "Atlantis Polygon WBTC",
-            "symbol": "aWBTC",
-            "decimals": 8,
-            "address": "0xF59aa1208f398a699C31271b036dF30B0BD63149",
-            "initial_exchange_rate_mantissa": "20000000000000000",
-            "admin": "0x",
-            "underlying": "0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6",
-            "contract": "aBTC"
-        },
-        "aLINK": {
-            "name": "Atlantis LINK",
-            "symbol": "aLINK",
-            "decimals": 8,
-            "address": "0x0b68782eFF3177f1F9240B64A7e2F8E0497e2454",
-            "initial_exchange_rate_mantissa": "20000000000000000",
-            "admin": "0x",
-            "underlying": "0x53E0bca35eC356BD5ddDFebbD1Fc0fD03FaBad39",
-            "contract": "ABep20Delegate"
-        }
-    },
     "InterestRateModel": {
         "Base0bps_Slope1200bps_Jump2800bps_Kink80": {
             "name": "Base0bps_Slope1200bps_Jump2800bps_Kink80",
@@ -144,6 +77,16 @@
             "base": "0",
             "slope": "120000000000000000",
             "jump": "2800000000000000000",
+            "kink": "800000000000000000"
+        },
+        "Base260bps_Slope1200bps_Jump3000bps_Kink80": {
+            "name": "Base260bps_Slope1200bps_Jump3000bps_Kink80",
+            "contract": "JumpRateModelV2",
+            "description": "JumpRateModelV2 baseRate=260000000000000000 multiplier=120000000000000000 jump=3000000000000000000 kink=800000000000000000",
+            "address": "0x686c87b31799028A890cd4C35Cfe1d8C5Fad9B4F",
+            "base": "260000000000000000",
+            "slope": "120000000000000000",
+            "jump": "3000000000000000000",
             "kink": "800000000000000000"
         }
     }

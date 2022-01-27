@@ -3,7 +3,7 @@ pragma experimental ABIEncoderV2;
 
 contract GovernorAlpha {
     /// @notice The name of this contract
-    string public constant name = "Atlantis Governor Alpha";
+    string public constant name = "Atlantis Polygon Governor Alpha";
 
     /// @notice The number of votes in support of a proposal required in order for a quorum to be reached and for a vote to succeed
     function quorumVotes() public pure returns (uint) { return 130000e18; } // 130,000 = 2% of Atlantis
@@ -15,7 +15,7 @@ contract GovernorAlpha {
     function proposalMaxOperations() public pure returns (uint) { return 30; } // 30 actions
 
     /// @notice The delay before voting on a proposal may take place, once proposed
-    function votingDelay() public pure returns (uint) { return 1; } // 1 block
+    function votingDelay() public pure returns (uint) { return 60; } // 60 block ~2 minutes in blocks (assuming 2s blocks)
 
     /// @notice The duration of voting on a proposal, in blocks
     function votingPeriod() public pure returns (uint) { return 60 * 60 * 24 * 2 / 2; } // ~2 days in blocks (assuming 3s blocks)
