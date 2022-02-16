@@ -129,7 +129,7 @@ async function makeAToken(opts = {}) {
   const interestRateModel = opts.interestRateModel || await makeInterestRateModel(opts.interestRateModelOpts);
   const exchangeRate = etherMantissa(dfn(opts.exchangeRate, 1));
   const decimals = etherUnsigned(dfn(opts.decimals, 8));
-  const symbol = opts.symbol || (kind === 'abnb' ? 'aMATIC' : 'aOMG');
+  const symbol = opts.symbol || (kind === 'MATIC' ? 'aMATIC' : 'aOMG');
   const name = opts.name || `AToken ${symbol}`;
   const admin = opts.admin || root;
 
@@ -452,6 +452,16 @@ async function pretendBorrow(aToken, borrower, accountIndex, marketIndex, princi
   await send(aToken, 'harnessSetBlockNumber', [etherUnsigned(blockNumber)]);
 }
 
+async function quickBorrow(aToken, minter, borrowAmount, opts = {}) {
+  // make sure to accrue interest
+  await fastForward(aToken, 1);
+
+  if (dfn(opts.exchangeRate))
+    expect(await send(aToken, 'harnessSetExchangeRate', [etherMantissa(opts.exchangeRate)])).toSucceed();
+
+  return send(aToken, 'borrow', [borrowAmount], { from: minter });
+}
+
 module.exports = {
   makeComptroller,
   makeAToken,
@@ -474,7 +484,7 @@ module.exports = {
 
   preApprove,
   quickMint,
-
+  quickBorrow,
   preSupply,
   quickRedeem,
   quickRedeemUnderlying,

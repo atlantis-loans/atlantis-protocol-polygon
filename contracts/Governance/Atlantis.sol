@@ -12,7 +12,7 @@ contract Atlantis {
     uint8 public constant decimals = 18;
 
     /// @notice Total number of tokens in circulation
-    uint public constant totalSupply = 6500000e18; // 6500000 ATL
+    uint public constant totalSupply = 6500000e18; // 6500000 ATLX
 
     /// @notice Allowance amounts on behalf of others
     mapping (address => mapping (address => uint96)) internal allowances;
